@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Git test :)
+
 void task1()
 {
 	int min = 100;
