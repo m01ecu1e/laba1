@@ -64,22 +64,36 @@ void task3()
 void task4()
 {
 	srand(time(NULL));
-	printf("Задание 4:\n");
-	int sum = 0;
-	int mas[5][5] = { 0 };
-	for (int i = 0; i < 5; i++)
-	{
-		for (int j = 0; j < 5; j++)
-		{
-			mas[i][j] = rand() % 100;
-			printf("%2d ", mas[i][j]);
-			sum = sum + mas[i][j];
-		}
-		printf("\t--SUM--> %d\n", sum);
-		sum = 0;
-	}
-	printf("\n");
+	printf("Динам. матрица\n");
+	int** mas;
+	int strok, stolb, i, j;
+	printf("Введите кол-во строк: ");
+	scanf("%d", &strok);
+	printf("Введите кол-во столбцов: ");
+	scanf("%d", &stolb);
+	mas = (int**)malloc(strok * sizeof(int*));
 
+	for (i = 0; i < strok; i++)
+	{
+		mas[i] = (int*)malloc(stolb * sizeof(int));
+	}
+	for (i = 0; i < strok; i++)
+	{
+		for (j = 0; j < stolb; j++)
+		{
+			mas[i][j] = rand() % 99;
+		}
+	}
+
+
+	for (i = 0; i < strok; i++)
+	{
+		for (j = 0; j < stolb; j++)
+		{
+			printf("%3d", mas[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 void task5()
@@ -92,25 +106,23 @@ void task5()
 		char facult[40];
 		int Nomzach;
 	} stud[3];
-	int kolv = 0; //flag = 0;
-	//printf("Хотите очищать поле после каждого ввода?\n0. Да\n1. Нет\n»>\n");
-	//scanf("%d", &flag);
+	int kolv = 0;
 	printf("Введите количество студентов, которое хотите добавить\n»>\n");
 	scanf("%d", &kolv);
 	for (i = 0; i < kolv; i++)
 	{
 		printf("Введите фамилию студента\n");
-		scanf("%20s", &stud[i].famil); 
+		scanf("%20s", &stud[i].famil);
 		OemToCharA(stud[i].famil, stud[i].famil);
-		
+
 		printf("Введите имя студента\n");
-		scanf("%20s", &stud[i].name); 
+		scanf("%20s", &stud[i].name);
 		OemToCharA(stud[i].name, stud[i].name);
-		
+
 		printf("Введите название факультета студента\n");
-		scanf("%20s", &stud[i].facult); 
+		scanf("%20s", &stud[i].facult);
 		OemToCharA(stud[i].facult, stud[i].facult);
-		
+
 		printf("Введите номер зачетной книжки студента\n");
 		scanf("%20d", &stud[i].Nomzach);
 	}
@@ -126,37 +138,14 @@ void task5()
 	scanf("%s", sl);
 	OemToCharA(sl, sl);
 	printf("\n");
-	int chet = 0;
+	short chet = 0;
 	for (int i = 0; i < kolv; i++)
 	{
-		int pr = 99;
-		if (strcmp(sl, stud[i].famil) == 0)
+		if (strcmp(sl, stud[i].famil) == 0 || strcmp(sl, stud[i].name) == 0 || strcmp(sl, stud[i].facult) == 0)
 		{
 			printf("Студент %s %s обучается на факультете %s, номер зачётной книжки %d\n", stud[i].famil, stud[i].name, stud[i].facult, stud[i].Nomzach);
 			chet++;
-			pr = chet;
 		}
-		if (strcmp(sl, stud[i].name) == 0 && pr != chet)
-		{
-			printf("Студент %s %s обучается на факультете %s, номер зачётной книжки %d\n", stud[i].famil, stud[i].name, stud[i].facult, stud[i].Nomzach);
-			chet++;
-			pr = chet;
-
-		}
-		if (strcmp(sl, stud[i].facult) == 0 && pr != chet)
-		{
-			printf("Студент %s %s обучается на факультете %s, номер зачётной книжки %d\n", stud[i].famil, stud[i].name, stud[i].facult, stud[i].Nomzach);
-			chet++;
-			pr = chet;
-
-		}
-		/*if (strcmp(sl, nomzach2) == 0 && pr != chet)
-		{
-		printf("Студент %s %s обучается на факультете %s, номер зачётной книжки %d\n", stud[i].famil, stud[i].name, stud[i].facult, stud[i].Nomzach);
-		chet++;
-		pr = chet;
-
-		}*/
 	}
 	if (chet == 0)
 		printf("|_______Ничего не найдено_______|\n");
